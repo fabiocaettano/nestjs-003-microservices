@@ -19,8 +19,6 @@ nvm use versão
 [NVM](https://github.com/nvm-sh/nvm)
 
 
-
-
 # NestJS
 
 <p> Instalar o nest </p>
@@ -71,7 +69,7 @@ model Notification {
 }
 ```
 
-<p>Criar a migration:</p>
+<p>Cria a migration:</p>
 
 ```
 $ npx prisma migrate dev
