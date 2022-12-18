@@ -43,5 +43,32 @@ readtAt?: Date | null;
 
 ## Value Objects
 
-<p>Criar uma classe para validar o atributo contents</p>
+<p>A classe Content é utilizada para validar o atributo content.</p>
+<p>Ao invés de string como tipo de dados para o atributo content, será utilizado a classe Content.</p>
+<p>Isto deixa a classe Notification mas limpa.</p>
+
+``` ts
+export class Content {
+    private readonly content: string;
+
+    get value(): string{
+        return this.content;
+    }
+
+    private validateContentLength(content: string): boolean{
+        return content.length >= 5 && content.length <= 240;
+    }
+
+    constructor(content: string){
+        
+        const isContentLengthValid = this.validateContentLength(content);
+
+        if (!isContentLengthValid){
+            throw new Error('Content length error.');
+        }
+
+        this.content = content;
+    }
+}
+```
 
