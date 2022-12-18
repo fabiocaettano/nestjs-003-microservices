@@ -72,3 +72,70 @@ export class Content {
 }
 ```
 
+
+## JEST
+
+<p>Por padrão o Nest traz o JEST dentro do arquivo package.json.</p>
+
+<p>Neste laboratório o JEST será extraido para o arquivo jest.config.ts e excluido do package.json.</p>
+
+<p>Exemplo do arquivo content.spec.ts:</p>
+
+``` ts
+describe('Notification content', () => {
+    it('should be able to create a notification content', () => {
+        const content = new Content('você recebeu uma solicitação de amizade');      
+        expect(content).toBeTruthy();
+    });
+    
+    it('should not be able to create a notification conten with less than 5 character', () =>{    
+        expect(() => new Content('aaa')).toThrow();
+    });
+    
+    it('should not be able to create a notification conten with more than 240 character', () =>{    
+        expect(() => new Content('a'.repeat(241))).toThrow();
+    });
+});
+```
+<p>Para executar o teste:</p>
+
+``` ts
+$ npm run test
+```
+
+## Helpers
+
+<p>O atributo createdAt da classe notification não é opcional.</p>
+<p>Mas este valor não deve ser instanciado.</p>
+<p>Para resolver este conflito pode ser utilizado o Helpers, que no construtor da classe Notification, tratará este atributo como opcional.</p>
+
+<p>Helpers foi configurado no diretório "src >> helpers >> Replace.ts":</p>
+
+``` ts
+export type Replace<T, R> = Omit<T, keyof R> & R;
+``` 
+
+<p> Configuração no construtor da classe Notification.</p>
+``` ts
+constructor(props: Replace<NotificationProps, { createdAt?: Date}>){
+    this.props = {
+        ... props,
+        createdAt: props.createdAt ?? new Date()
+    }
+}
+```
+
+<p>No teste abaixo o atributo createdAt não é instanciado.</p>
+
+``` ts
+describe('Notification', () => {
+    it('should be able to create a notification', () => {
+        const notification = new Notification({
+            content: new Content('Nova solicitação de amizade'),
+            category: 'social',
+            recipientId: 'example-recipient-id',
+        });
+        expect(notification).toBeTruthy();
+    });    
+});
+```
