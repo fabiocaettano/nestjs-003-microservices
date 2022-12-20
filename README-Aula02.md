@@ -139,3 +139,53 @@ describe('Notification', () => {
     });    
 });
 ```
+
+## Banco de dados em memória
+
+<p>Foi implementado a classe NotificationsRepository, no diretório "applicatio >> repository".</p>
+<p>É implementado o conceito de injenção de dependência.</p>
+<p>A classe InMemoryNotificationRepository irá implementar NotificationRepository. Com isso ela deve implemntar o metódo create, com a classe Notification como atributo.</p>
+<p>Podendo assim regitrar o dado.</p>
+
+``` ts
+export abstract class NotificationsRepository{
+    abstract create(notification: Notification): Promise<void>;
+}
+```
+
+<p>Esta classe InMemoryNotificationRepository simula uma base dados. Configurado no " diretório test >> repositories".</p>
+
+``` ts
+export class InMemoryNotificationRepository implements NotificationsRepository{
+
+    public notifications: Notification[] = [];
+    
+    async create(notification: Notification){
+        await this.notifications.push(notification);
+    }
+}
+```
+
+<p>Teste para comprovar o conceito:</p>
+
+``` ts
+describe('Send Notification', () => {
+    
+    it('should be able to send a notification', async () =>{
+
+    const notificationRepository = new InMemoryNotificationRepository();
+    const sendNotification = new SendNotification(notificationRepository);
+
+
+    const { notification } = await sendNotification.execute({
+        content: 'This is a notification',
+        category: 'social',
+        recipientId: 'example-recipeint-id'
+    });
+    
+    expect(notificationRepository.notifications).toHaveLength(1);
+    expect(notificationRepository.notifications[0]).toEqual(notification);
+
+    });
+});
+```
