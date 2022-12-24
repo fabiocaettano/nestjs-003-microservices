@@ -1,4 +1,4 @@
-# Aula 01 - 
+# Aula 01 - Fundamentos do NestJS e Prisma
 
 ## Sumário
 
@@ -9,7 +9,8 @@
 
 ## NVM
 
-<p>Executar o script para instalar o NVM</p>
+<p>Executar o script para instalar o NVM:</p>
+
 ``` bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 ```
