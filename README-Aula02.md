@@ -6,28 +6,27 @@
 
 ## Sumário
 
-* [Organizando os diretórios](#organizando_os_diretórios) 
-* [Entidade Notification](#entidade_notification)
-* [Value Objects](#value_objects)
-* [Jest](#jest)
-* [Jest](#helpers)
-* [Banco de Dados em Memória](#banco_de_dados_em_memória)
-* [Banco de Dados SQLite](#banco_de_dados_sqlite)
-
-
+* [Organizando os diretórios](#organizando-os-diretórios) 
+* [Entidade Notification](#entidade-notification)
+* [Classe Content](#classe-content)
+* [Testes](#testes)
+* [Helpers](#helpers)
+* [Banco de Dados em Memória](#banco-de-dados-em-memória)
+* [Banco de Dados SQLite](#banco-de-dados-sqlite)
 
 
 ## Organizando os diretórios
 
-<p>Tudo que é relacionado a uma camada externa da aplicação será colocado no diretório "src >> infra". Exemplo: Banco de dados, rotas.</p>
+<p>Tudo que é relacionado a camada externa da aplicação foi colocado no diretório "src >> infra". Exemplo: Banco de dados, rotas e dtos (objeto de transferência de dados).</p>
 
-<p>No diretório "src >> application" são colocados os arquivos que são indenpendentes a camada externa da aplicação.</p>
+<p>Já no diretório "src >> application" foram colocados os arquivos que são indenpendentes da camada externa da aplicação.</p>
+
 
 ## Entidade Notification
 
-<p>Não necessariamente uma Entidade precisa ser a cópia de uma tabela na base de dados.</p>
+<p>Uma Entidade não precisa ser a cópia de uma tabela na base de dados.</p>
 
-<p>Implementação Getters e Setters.</p>
+<p>Foi implementado Getters e Setters nesta entidade.</p>
 
 ``` ts
 public set content(content: string){
@@ -58,9 +57,9 @@ export interface NotificationProps{
 readtAt?: Date | null;
 ``` 
 
-## Value Objects
+## Classe Content
 
-<p>A classe Content é utilizada para validar o atributo content.</p>
+<p>A classe Content é utilizada para validar o atributo content da entidade Notification.</p>
 <p>Ao invés de string como tipo de dados para o atributo content, será utilizado a classe Content.</p>
 <p>Isto deixa a classe Notification mas limpa.</p>
 
@@ -90,7 +89,7 @@ export class Content {
 ```
 
 
-## JEST
+## Testes
 
 <p>Por padrão o Nest traz o JEST dentro do arquivo package.json.</p>
 
@@ -120,11 +119,17 @@ describe('Notification content', () => {
 $ npm run test
 ```
 
+<p>Para visualizar a cobertura dos testes:</p>
+
+``` ts
+$ npm run test:cov
+```
+
 ## Helpers
 
 <p>O atributo createdAt da classe notification não é opcional.</p>
 <p>Mas este valor não deve ser instanciado.</p>
-<p>Para resolver este conflito pode ser utilizado o Helpers, que no construtor da classe Notification, tratará este atributo como opcional.</p>
+<p>Para resolver este conflito pode ser utilizado o Helpers.</p>
 
 <p>Helpers foi configurado no diretório "src >> helpers >> Replace.ts":</p>
 
@@ -133,7 +138,8 @@ export type Replace<T, R> = Omit<T, keyof R> & R;
 ``` 
 
 <p> Configuração no construtor da classe Notification.</p>
-``` ts
+
+```ts
 constructor(props: Replace<NotificationProps, { createdAt?: Date}>){
     this.props = {
         ... props,
@@ -209,6 +215,7 @@ describe('Send Notification', () => {
     });
 });
 ```
+
 ## Banco de dados SQlite
 
 <p>Na documentação do NestJs orienta que para utilizar o Prisma juntamente com o NestJs, é necessário implementar a classe PrismaService no código.</p>
@@ -234,7 +241,75 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 }
 ```
 
-<p> A classe NotificationsRepository é uma classe abstratada. E define os metódos que devem ser implemenados. No exemplo abaixo o metódo create recebe como parametro a classe Notification.</p> 
+<p>A classe PrimaService é configurada como providers no arquivo database-modueles.ts</p>
+
+``` ts
+@Module({
+    providers: [
+        PrismaService,
+        {
+            provide: NotificationsRepository,
+            useClass: PrismaNotificationsRepository
+        },
+    ],
+    exports:[
+        NotificationsRepository
+    ],
+})
+
+export class DatabaseModule {}
+``` 
+
+<p>A classe NotificationController recebe a requisição via protocolo Http.</p>
+<p>Os dados são interceptadados pelo anotação @Body, sendo seu tipo um DTO (CrateNotificationBody)</p>
+<p>O controller chama a classe SendNotification</p>
+
+``` ts
+@Post()
+  async create(@Body() body: CreateNotificationBody){
+
+    const { recipientId, content, category } = body;
+    
+    const { notification } = await this.sendNotification.execute({
+      recipientId,
+      content,
+      category
+    });
+
+    return {
+      notification
+    }
+  }  
+```
+
+<p>A classe SendNotification é um caso de uso e implementa NotificationsRepository.</p>
+
+``` ts
+@Injectable()
+export class SendNotification {
+
+    constructor(private notificationsRepository: NotificationsRepository){}
+
+    async execute(request: SendNotificationRequest): Promise<SendNotificationResponse>{
+
+        const { recipientId, content, category } = request;
+
+        const notification = new Notification({
+            recipientId,
+            content: new Content(content),
+            category,
+        });        
+
+        await this.notificationsRepository.create(notification);
+
+        return {
+            notification,
+        };
+    }
+}
+```
+
+<p> A classe NotificationsRepository é uma classe abstrata. </p> 
 
 ``` ts
 export abstract class NotificationsRepository{
@@ -242,9 +317,7 @@ export abstract class NotificationsRepository{
 }
 ```
 
-<p>A classe PrismaNotificationsRepository implementa a classe NotificationsRepository para ter acesso aos metódo create.</p>
-
-<p>Para registrar os dados na base de ados é utilizada a classe PrismaService</b>
+<p>A classe PrismaNotificationsRepository implementa a classe NotificationsRepository.</p>
 
 <p>A classe PrismaNotificationsRepository fica no diretório "infra >> database >> prima":</p>
 
@@ -269,23 +342,3 @@ export class PrismaNotificationsRepository implements NotificationsRepository{
     }
 }
 ```
-
-
-<p>A classe PrimaService é configurada como providers no arquivo database-modueles.ts</p>
-
-``` ts
-@Module({
-    providers: [
-        PrismaService,
-        {
-            provide: NotificationsRepository,
-            useClass: PrismaNotificationsRepository
-        },
-    ],
-    exports:[
-        NotificationsRepository
-    ],
-})
-
-export class DatabaseModule {}
-``` 
