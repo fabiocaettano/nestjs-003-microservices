@@ -143,8 +143,11 @@ describe('Notification', () => {
 ## Banco de dados em memória
 
 <p>Foi implementado a classe NotificationsRepository, no diretório "applicatio >> repository".</p>
+
 <p>É implementado o conceito de injenção de dependência.</p>
+
 <p>A classe InMemoryNotificationRepository irá implementar NotificationRepository. Com isso ela deve implemntar o metódo create, com a classe Notification como atributo.</p>
+
 <p>Podendo assim regitrar o dado.</p>
 
 ``` ts
@@ -189,3 +192,83 @@ describe('Send Notification', () => {
     });
 });
 ```
+## Banco de dados SQlite
+
+<p>Na documentação do NestJs orienta que para utilizar o Prisma juntamente com o NestJs, é necessário implementar a classe PrismaService no código.</p>
+
+<p>A classe <b>Prisma Service</b> foi implementada no diretório "src >> infra >> database >> prisma"".</p>
+
+
+``` ts
+import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
+
+@Injectable()
+export class PrismaService extends PrismaClient implements OnModuleInit {
+  async onModuleInit() {
+    await this.$connect();
+  }
+
+  async enableShutdownHooks(app: INestApplication) {
+    this.$on('beforeExit', async () => {
+      await app.close();
+    });
+  }
+}
+```
+
+<p> A classe NotificationsRepository é uma classe abstratada. E define os metódos que devem ser implemenados. No exemplo abaixo o metódo create recebe como parametro a classe Notification.</p> 
+
+``` ts
+export abstract class NotificationsRepository{
+    abstract create(notification: Notification): Promise<void>;
+}
+```
+
+<p>A classe PrismaNotificationsRepository implementa a classe NotificationsRepository para ter acesso aos metódo create.</p>
+
+<p>Para registrar os dados na base de ados é utilizada a classe PrismaService</b>
+
+<p>A classe PrismaNotificationsRepository fica no diretório "infra >> database >> prima":</p>
+
+``` ts
+@Injectable()
+export class PrismaNotificationsRepository implements NotificationsRepository{
+
+    constructor(private prismaService: PrismaService){}
+
+    async create(notification: Notification): Promise<void>{
+
+        await this.prismaService.notification.create({
+            data: {
+                id: notification.id,
+                category: notification.category,                
+                content: notification.content.value,
+                recipientId: notification.recipientId,
+                readAt: notification.readAt,
+                createdAt: notification.createdAt
+            }
+        })
+    }
+}
+```
+
+
+<p>A classe PrimaService é configurada como providers no arquivo database-modueles.ts</p>
+
+``` ts
+@Module({
+    providers: [
+        PrismaService,
+        {
+            provide: NotificationsRepository,
+            useClass: PrismaNotificationsRepository
+        },
+    ],
+    exports:[
+        NotificationsRepository
+    ],
+})
+
+export class DatabaseModule {}
+``` 

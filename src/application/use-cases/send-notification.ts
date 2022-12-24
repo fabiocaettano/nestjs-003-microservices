@@ -26,7 +26,7 @@ export class SendNotification {
             recipientId,
             content: new Content(content),
             category,
-        });
+        });        
 
         await this.notificationsRepository.create(notification);
 
