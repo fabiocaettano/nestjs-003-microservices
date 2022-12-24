@@ -34,7 +34,7 @@ nvm insall versão
 nvm use versão
 ```
 
-[Site do NVM](https://github.com/nvm-sh/nvm)
+<p>[Site do NVM](https://github.com/nvm-sh/nvm)</p>
 
 
 ## NestJS
@@ -58,7 +58,7 @@ $ cd notifications-service
 $ npm run start:dev
 ```
 
-[Site do NestJS](https://nestjs.com/)
+<p>[Site do NestJS](https://nestjs.com/)</p>
 
 
 ## Prisma
@@ -110,7 +110,7 @@ $ npx prisma migrate dev
 npx prisma studio
 ```
 
-[Site do Prisma](https://www.prisma.io/)
+<p>[Site do Prisma](https://www.prisma.io/)</p>
 
 
 ## Validator
@@ -121,5 +121,5 @@ npx prisma studio
 $ npm i class-validator class-transformer
 ```
 
-[Site do Class Validator](https://github.com/typestack/class-validator)
-[Site do Class Transformer](https://github.com/typestack/class-transformer)
+<p>[Site do Class Validator](https://github.com/typestack/class-validator) |
+[Site do Class Transformer](https://github.com/typestack/class-transformer)</p>
