@@ -1,12 +1,29 @@
 # Aula 02 - Dominio, casos de uso e regras de negócio.
 
+<p align="center">
+   <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=RED&style=for-the-badge" #vitrinedev/>
+</p>
+
+## Sumário
+
+* [Organizando os diretórios](#organizando_os_diretórios) 
+* [Entidade Notification](#entidade_notification)
+* [Value Objects](#value_objects)
+* [Jest](#jest)
+* [Jest](#helpers)
+* [Banco de Dados em Memória](#banco_de_dados_em_memória)
+* [Banco de Dados SQLite](#banco_de_dados_sqlite)
+
+
+
+
 ## Organizando os diretórios
 
 <p>Tudo que é relacionado a uma camada externa da aplicação será colocado no diretório "src >> infra". Exemplo: Banco de dados, rotas.</p>
 
 <p>No diretório "src >> application" são colocados os arquivos que são indenpendentes a camada externa da aplicação.</p>
 
-## Criando a Entidade Notification
+## Entidade Notification
 
 <p>Não necessariamente uma Entidade precisa ser a cópia de uma tabela na base de dados.</p>
 
