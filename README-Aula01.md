@@ -1,54 +1,68 @@
-# NVM
+# Aula 01 - 
 
+## Sumário
+
+* [NVM](#nvm)
+* [NestJS](#nestjs)
+* [Prisma](#prisma)
+* [Validator](#validator)
+
+## NVM
+
+<p>Executar o script para instalar o NVM</p>
 ``` bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 ```
 
+<p>Ativar o NVM: </p>
 ``` bash
-~/.profile
+~/. .profile
 ```
 
 <p>Comandos NVM: </p>
-```
+
+``` bash
 nvm list-remote
 nvm list
 nvm insall versão
 nvm use versão
 ```
 
-[NVM](https://github.com/nvm-sh/nvm)
+[Site do NVM](https://github.com/nvm-sh/nvm)
 
 
-# NestJS
+## NestJS
 
-<p> Instalar o nest </p>
+<p>Instalar o NestJS:</p>
 
 ``` bash
 $ npm i -g @nestjs/cli
 ```
 
-<p>criar o projeto e selecionar o gerenciador de pacote: </p>
+<p>Comando para criar o projeto e selecionar o gerenciador de pacote: </p>
 
-```
+``` bash
 $ nest new notifications-service
 ```
 
 <p>Abrir pasta do projeto e execuar:</p>
 
 ``` bash
-cd notifications-service
-
-npm run start dev
+$ cd notifications-service
+$ npm run start:dev
 ```
 
-# Prisma
+## Prisma
+
+<p>Instalar o Prisma:</p>
 
 ``` bash
+$ cd notifications-service
 $ npm i prisma -D
 $ npm install @prisma/client
 ```
 
-<p>O comando abaixo vair criar o arquivo "prisma >> schema.prisma" e o "src >> .env" :</p>
+<p>O comando abaixo cria o arquivo "prisma >> schema.prisma" e o "src >> .env" :</p>
 
 ``` bash
 $ npx prisma init --datasource-provider SQLite
@@ -88,7 +102,9 @@ npx prisma studio
 ```
 
 
-# Validator
+## Validator
+
+<p>Validar os valores das entidades:</p>
 
 ``` bash
 $ npm i class-validator class-transformer

@@ -4,6 +4,9 @@
    <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=RED&style=for-the-badge" #vitrinedev/>
 </p>
 
+<p>Laboratório de NodeJS realizado pela Rockeseat no mês de Dezembro 2022.</p>
+<p>Chamado de Ignite.</p>
+
 ## Sumário
 
 * [Organizando os diretórios](#organizando-os-diretórios) 
