@@ -20,6 +20,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 ```
 
 <p>Ativar o NVM: </p>
+
 ``` bash
 ~/. .profile
 ```
@@ -56,6 +57,9 @@ $ nest new notifications-service
 $ cd notifications-service
 $ npm run start:dev
 ```
+
+[Site do NestJS](https://nestjs.com/)
+
 
 ## Prisma
 
@@ -106,6 +110,8 @@ $ npx prisma migrate dev
 npx prisma studio
 ```
 
+[Site do Prisma](https://www.prisma.io/)
+
 
 ## Validator
 
@@ -114,3 +120,6 @@ npx prisma studio
 ``` bash
 $ npm i class-validator class-transformer
 ```
+
+[Site do Class Validator](https://github.com/typestack/class-validator)
+[Site do Class Transformer](https://github.com/typestack/class-transformer)
