@@ -3,10 +3,10 @@ import { InMemoryNotificationRepository } from "../../../test/repositories/in-me
 
 /*const notifications: Notification[] = [];
 
-const notificationsRepository = {
-    async create(notification: Notification){
+const notificationRepository = {
+    async create(notification: Notification): Promise<void>{
         notifications.push(notification);
-    },
+    }
 }*/
 
 describe('Send Notification', () => {
