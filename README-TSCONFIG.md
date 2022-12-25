@@ -5,3 +5,14 @@
 "strict": false,
 "strictNullChecks": true
 ```
+
+<p>Criação de alias para os diretórios.</p>
+
+``` json
+"paths":{
+      "@application/*": ["./src/application/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@infra/*": ["./src/infra/*"],
+      "@test/*": ["./test/*"],
+    }
+```
