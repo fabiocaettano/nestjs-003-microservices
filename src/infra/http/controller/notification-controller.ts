@@ -3,6 +3,7 @@ import { DeleteNotification } from 'src/application/use-cases/delete-notificatio
 import { SendNotification } from 'src/application/use-cases/send-notification';
 import { CreateNotificationBody } from '../dto/create-notification-body';
 import { DeleteNotificationParam } from '../dto/delete-notification-param';
+import { NotificationViewModel } from '../view-models/notification-view-model';
 
 @Controller('notifications')
 export class NotificationController {
@@ -24,7 +25,7 @@ export class NotificationController {
     });
 
     return {
-      notification
+      notification: NotificationViewModel.toHTTP(notification),
     }
   }  
 
