@@ -9,6 +9,10 @@ export class PrismaNotificationsRepository implements NotificationsRepository{
 
     constructor(private prismaService: PrismaService){}
     
+    countManyByRecipientId(recipientId: string): Promise<number> {
+        throw new Error("Method not implemented.")
+    }
+    
 
     async create(notification: Notification): Promise<void>{
 
@@ -22,24 +26,10 @@ export class PrismaNotificationsRepository implements NotificationsRepository{
     findById(notificationId: string): Promise<Notification | null> {
         throw new Error("Method not implemented.")
     }
+    
     save(notification: Notification): Promise<void> {
         throw new Error("Method not implemented.")
     }
 
-   async delete(id: string): Promise<void>{
-        await this.prismaService.notification.delete({
-            where:{
-                id : id
-            }
-        })
-   }    
-
-   async count(id: string): Promise<any>{
-
-        const number  = await this.prismaService.notification.count({where: {id: id}})
-                
-        return{
-            number
-        }
-    }   
+   
 }
