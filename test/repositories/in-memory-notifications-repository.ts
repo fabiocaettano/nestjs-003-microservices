@@ -2,19 +2,33 @@ import { NotificationsRepository } from "src/application/repository/notification
 import { Notification } from "src/application/entities/notifications";
 
 export class InMemoryNotificationRepository implements NotificationsRepository{
-
+    
     public notifications: Notification[] = [];
     
-    async create(notification: Notification): Promise<void>{
+    async create(notification: Notification){
         await this.notifications.push(notification);
     }
 
-    async delete(id: string): Promise<void>{
-        await this.notifications.length;
-    }
+    async findById(notificationId: string): Promise<Notification | null> {
+        const notification = this.notifications.find(
+            (item) => item.id === notificationId,
+        );
 
-    async count(id: string): Promise<any>{
-        await this.notifications.length;
+        if(!notification){
+            return null;
+        }
+
+        return notification;
     }
     
+    async save(notification: Notification): Promise<void> {
+        
+        const notificationIndex = this.notifications.findIndex(
+            (item) => item.id === notification.id,
+        );        
+
+        if(notificationIndex >= 0){
+           this.notifications[notificationIndex] = notification;
+        }        
+    }    
 }

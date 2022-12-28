@@ -16,3 +16,8 @@
       "@test/*": ["./test/*"],
     }
 ```
+
+<p>Checar errors referente ao TypeScript:</p>
+```
+$ npx tsc --noEmit
+```
