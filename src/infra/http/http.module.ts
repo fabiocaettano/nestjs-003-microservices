@@ -1,5 +1,9 @@
+import { CancelNotification } from "@application/use-cases/cancel-notification";
+import { CountRecipientNotifications } from "@application/use-cases/count-recipientid-notifications";
+import { GetRecipientNotifications } from "@application/use-cases/get-recipient-notifications";
+import { ReadNotification } from "@application/use-cases/read-notifications";
+import { UnreadNotification } from "@application/use-cases/unread-notifications";
 import { Module } from "@nestjs/common";
-import { DeleteNotification } from "src/application/use-cases/delete-notification";
 import { SendNotification } from "../../application/use-cases/send-notification";
 import { DatabaseModule } from "../database/database.module";
 import { NotificationController } from "./controller/notification-controller";
@@ -9,7 +13,11 @@ import { NotificationController } from "./controller/notification-controller";
     controllers: [NotificationController],
     providers: [
         SendNotification,
-        DeleteNotification
+        CancelNotification,
+        ReadNotification,
+        UnreadNotification,
+        CountRecipientNotifications        ,
+        GetRecipientNotifications
     ]    
 })
 export class HttpModule {}

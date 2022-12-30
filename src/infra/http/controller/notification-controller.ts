@@ -1,44 +1,83 @@
-import { Controller, Post, Delete, Body, Param } from '@nestjs/common';
-import { DeleteNotification } from 'src/application/use-cases/delete-notification';
+import { Controller, Post, Patch, Body, Param, Get } from '@nestjs/common';
 import { SendNotification } from 'src/application/use-cases/send-notification';
 import { CreateNotificationBody } from '../dto/create-notification-body';
-import { DeleteNotificationParam } from '../dto/delete-notification-param';
 import { NotificationViewModel } from '../view-models/notification-view-model';
+import { CancelNotification } from '@application/use-cases/cancel-notification';
+import { ReadNotification } from '@application/use-cases/read-notifications';
+import { UnreadNotification } from '@application/use-cases/unread-notifications';
+import { CountRecipientNotifications } from '@application/use-cases/count-recipientid-notifications';
+import { GetRecipientNotifications } from '@application/use-cases/get-recipient-notifications';
+import { get } from 'http';
 
 @Controller('notifications')
 export class NotificationController {
 
   constructor(
     private sendNotification: SendNotification,
-    private deleteNotification: DeleteNotification
+    private cancelNotification: CancelNotification,
+    private readNotification: ReadNotification,
+    private unreadNotification: UnreadNotification,
+    private countRecipientNotification: CountRecipientNotifications,
+    private getRecipientNotification: GetRecipientNotifications
     ){}
 
-  @Post()
-  async create(@Body() body: CreateNotificationBody){
+    @Patch(':id/cancel')
+    async cancel(@Param('id') id: string) {
+      await this.cancelNotification.execute({
+        notificationId: id,
+      });
+    }
 
-    const { recipientId, content, category } = body;
-    
-    const { notification } = await this.sendNotification.execute({
+    @Get('count/from/:recipientId')
+    async countFromRecipient(@Param('recipientId') recipientId: string): Promise<{count : number}>{
+      
+      const { count } = await this.countRecipientNotification.execute({recipientId});
+
+      return {
+        count
+      }
+    }
+
+  @Get('from/:recipientId')
+  async getFromRecipientId(@Param('recipientId') recipientId: string){
+
+    const { notifications}  = await this.getRecipientNotification.execute({
       recipientId,
-      content,
-      category
     });
 
-    return {
-      notification: NotificationViewModel.toHTTP(notification),
-    }
-  }  
-
-  @Delete(':id')
-  async delete(@Param() param: DeleteNotificationParam){
-
-    const { id } = param;
-
-    await this.deleteNotification.execute({id});
-
     return{
-      id
+      notifications: notifications.map(NotificationViewModel.toHTTP),
     }
 
   }
+
+    @Patch(':id/read')
+    async read(@Param('id') id: string) {
+      await this.readNotification.execute({
+        notificationId: id,
+      });
+    }
+
+    @Patch(':id/unread')
+    async unread(@Param('id') id: string) {
+      await this.unreadNotification.execute({
+        notificationId: id,
+      });
+    }
+
+    @Post()
+    async create(@Body() body: CreateNotificationBody){
+
+      const { recipientId, content, category } = body;
+    
+      const { notification } = await this.sendNotification.execute({
+        recipientId,
+        content,
+        category
+      });
+
+      return {
+        notification: NotificationViewModel.toHTTP(notification),
+      }
+    }   
 }
