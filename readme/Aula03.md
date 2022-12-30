@@ -1,6 +1,10 @@
 # Aula 03 - 
 
 * [Mappers](#mappers)
+* [Factory](#factory)
+* [Casos de Uso](#casos-de-uso)
+    - [Cancel Notification](##cancel-notifications)
+    - [Count Recipeint Notifications](##count-recipient-notifications)
 
 ## Mappers
 
@@ -32,6 +36,31 @@ return {
     notification: NotificationViewModel.toHTTP(notification),
 }
 ```
+## Factory
+
+<p>Abstrai criação de objetos da classe Notification:</p>
+
+``` ts
+type Override = Partial<NotificationProps>
+
+export function makeNotification(override: Override = {}){
+    return new Notification({
+        category: 'social',
+        content: new Content('Nova solicitação de amizade'),
+        recipientId: 'recipient-2',
+        ...override,
+    })
+}
+```
+
+
+<p>Exemplo da chamada da factory:</p>
+
+``` ts
+await notificationRepository.create(makeNotification({ recipientId : 'recipient-1'}),);
+await notificationRepository.create(makeNotification({ recipientId : 'recipient-1'}),);
+await notificationRepository.create(makeNotification({ recipientId : 'recipient-2'}),);
+```
 
 
 ## Casos de Usos
@@ -39,14 +68,6 @@ return {
 ### Cancel Notifications
 
 <p>Implementado a classe NotificationNotFound, por ser um erro genérico e assim podendo ser reaproveitado.</p>
-
-``` ts
-export class NotificationNotFound extends Error {
-    constructor(){
-        super('Notification Not Found');
-    }
-}
-```
 
 <p>Incluido na classe NotificationRepository</p>
 
@@ -77,41 +98,8 @@ model Notification {
 $ npx prisma migrate dev
 ```
 
-<p>Incluido canceledAt na classe Notification:</p>
+### Count Recipient Notification
 
-``` ts
-public canceledAt(){
-    this.props.canceledAt = new Date();
-}
 
-public get canceledAt(): Date | null | undefined{
-    return this.props.canceledAt;
-}
-```
 
-<p>Implementado o caso de uso CancelNotification:</p>
-
-``` ts
-@Injectable()
-export class CancelNotification {
-
-    constructor(private notificationsRepository: NotificationsRepository){}
-
-    async execute(request: CancelNotificationRequest): Promise<CancelNotificationResponse>{
-
-        const { notificationId } = request;
-
-        const notification = await this.notificationsRepository.findById(notificationId);
-
-        if(!notification){
-            //throw new Error('Notification not found');
-            throw new NotificationNotFound();
-        }
-
-        notification.cancel();
-    }
-}
-```
-
-### Count Notifications
 
