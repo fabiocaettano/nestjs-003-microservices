@@ -65,6 +65,8 @@ export class PrismaNotificationsRepository implements NotificationsRepository{
 
         const raw = PrismaNotificationMapper.toPrisma(notification);
 
+        console.log(raw);
+
         await this.prismaService.notification.update({
            where:{
                 id: raw.id,
