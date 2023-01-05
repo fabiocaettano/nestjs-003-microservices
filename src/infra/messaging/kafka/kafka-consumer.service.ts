@@ -1,5 +1,6 @@
 import { Injectable, OnModuleDestroy } from "@nestjs/common";
 import { ServerKafka } from "@nestjs/microservices";
+require('dotenv').config();
 
 @Injectable()
 export class KafkaConsumerService extends ServerKafka implements OnModuleDestroy{
@@ -8,11 +9,11 @@ export class KafkaConsumerService extends ServerKafka implements OnModuleDestroy
         super({
             client: {
                 clientId: 'test-producer',
-                brokers: ['holy-tahr-14571-us1-kafka.upstash.io:9092'],
+                brokers: [`${process.env.BROKERS_UPSTASH}`],
                 sasl: {
                     mechanism: 'scram-sha-256',
-                    username: 'aG9seS10YWhyLTE0NTcxJPReW3mmIXGfH-ryYerbQsdX533yB-ZYs9keMtwuOpU',
-                    password: 'c60977d2264449a9a8ec2ef730f58503',
+                    username: `${process.env.USERNAME_UPSTASH}`,
+                    password: `${process.env.PASSWORD_UPSTASH}`,
                 },
                 ssl: true,
             }
