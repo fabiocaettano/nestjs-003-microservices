@@ -1,6 +1,10 @@
+# Producer
+
+Este script **producer.js** enviará mensagens para serem consumidas pela aplicação notificação.
+
 ## 1. Serveless for Kafka
 
-<p>No site da [Upstash](https://upstash.com/) disponibiliza um serviço para o registro de mensagens.</p>
+O site da [Upstash](https://upstash.com/) disponibiliza um serviço para o registro de mensagens.
 <p>Ideal para aplicações assíncronas.</p>
 <p>Neste serviço você criará um cluster e o tópico, é será disponibilizado algumas informações para autenticação, como broker, username e password.</p>
 
