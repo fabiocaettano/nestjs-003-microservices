@@ -27,13 +27,13 @@
 
 <p>Tecnologias utilizadas no projeto:</p>
 
-<ul>
-<li>Jest: framework para testes em JavaScript.</li>
-<li>Apache Kafka: O Apache Kafka é uma plataforma distribuída de transmissão de dados que é capaz de publicar, subscrever, armazenar e processar fluxos de registro em tempo real.</li>
-<li>NestJS: É um framework back-end que auxilia o desenvolvimento de aplicações eficientes. escaláveis e confiáveis em cima do Node.js.</li>
-<li>NodeJS: Node.js é um software de código aberto, multiplataforma, baseado no interpretador V8 do Google e que permite a execução de códigos JavaScript fora de um navegador web. A principal característica do Node.js é sua arquitetura assíncrona e orientada por eventos</li>
-<li>Prisma: É um ORM (Object Relational Mapper) de última geração.</li>
-<li>TypeScript: é uma linguagem de código aberto desenvolvida pela Microsoft que foi construída em cima do Javascript, que é muito difundido atualmente. Então esse “superset” foi criado para adicionar recursos de tipagem estáticas à linguagem original.</li>
+<ul><b>
+<li><b>Jest:</b> framework para testes em JavaScript.</li>
+<li><b>Apache Kafka:</b> O Apache Kafka é uma plataforma distribuída de transmissão de dados que é capaz de publicar, subscrever, armazenar e processar fluxos de registro em tempo real.</li>
+<li><b>NestJS:</b> É um framework back-end que auxilia o desenvolvimento de aplicações eficientes. escaláveis e confiáveis em cima do Node.js.</li>
+<li><b>NodeJS:</b> Node.js é um software de código aberto, multiplataforma, baseado no interpretador V8 do Google e que permite a execução de códigos JavaScript fora de um navegador web. A principal característica do Node.js é sua arquitetura assíncrona e orientada por eventos</li>
+<li><b>Prisma:</b> É um ORM (Object Relational Mapper) de última geração.</li>
+<li><b>TypeScript:</b> é uma linguagem de código aberto desenvolvida pela Microsoft que foi construída em cima do Javascript, que é muito difundido atualmente. Então esse “superset” foi criado para adicionar recursos de tipagem estáticas à linguagem original.</li>
 </ul>
 
 <p>Além das tecnologias utilizadas foram incluidas as seguintes dependências no projeto:</p>
@@ -63,8 +63,7 @@
 <li>src >> infra<li>
 </ul>
 
-<p>No diretório <b>src >> aplications</b> temos as entitades, os repositórios e os casos de uso.</p> 
-<p>Tudo que for independente da camada externa da aplicação.</p>
+<p>No diretório <b>src >> aplications</b> temos as entitades, os repositórios e os casos de uso. Tudo que for independente da camada externa da aplicação.</p>
 
 <p>No diretório <b>src >> infra</b> é referente a camada externa da aplicação. Como por exemplo Banco de dados, Controllers e serviços de mensageria</p>.
 
