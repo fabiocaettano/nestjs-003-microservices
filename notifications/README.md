@@ -27,7 +27,7 @@
 
 <p>Tecnologias utilizadas no projeto:</p>
 
-<ul><b>
+<ul>
 <li><b>Jest:</b> framework para testes em JavaScript.</li>
 <li><b>Apache Kafka:</b> O Apache Kafka é uma plataforma distribuída de transmissão de dados que é capaz de publicar, subscrever, armazenar e processar fluxos de registro em tempo real.</li>
 <li><b>NestJS:</b> É um framework back-end que auxilia o desenvolvimento de aplicações eficientes. escaláveis e confiáveis em cima do Node.js.</li>
@@ -73,14 +73,20 @@
 ## Máquina Virtual
 
 Utilizei o serviço da [Digital Ocean](https://www.digitalocean.com/) para criar 01 Droplet.
+
+Configuração do Droplet:
+1. Ubuntu 20.04;
+2. 1 CPU;
+3. 2 GB Memória;
+
 Neste Droplet será instalado o NVM para gerenciar o Node.
 
 
 ### NVM
 
-<p>Gerenciador de instalação no NodeJs.</p>
+Gerenciador de instalação no NodeJs.
 
-<p>Executar o script para instalar o NVM:</p>
+Executar o script para instalar o NVM:
 
 ``` bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
