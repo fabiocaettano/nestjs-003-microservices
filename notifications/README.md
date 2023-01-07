@@ -86,19 +86,19 @@ Neste Droplet será instalado o NVM para gerenciar o Node.
 
 Gerenciador de instalação no NodeJs.
 
-Executar o script para instalar o NVM:
+Executar o script para instalar o [NVM](https://github.com/nvm-sh/nvm) :
 
 ``` bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 ```
 
-<p>Ativar o NVM: </p>
+Ativar o NVM:
 
 ``` bash
 ~/. .profile
 ```
 
-<p>Comandos NVM: </p>
+Comandos NVM:
 
 ``` bash
 nvm list-remote
@@ -107,14 +107,13 @@ nvm insall versão
 nvm use versão
 ```
 
-[Site do NVM](https://github.com/nvm-sh/nvm)
 
 ### Git Clone
 
-<p>Clonar o projeto:</p>
+Clonar o projeto:
 
 ``` git
-$
+$ 
 ```
 
 ### Variável de Ambiente
