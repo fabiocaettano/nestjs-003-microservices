@@ -28,14 +28,18 @@
 <p>Tecnologias utilizadas no projeto:</p>
 
 <ul>
+<li>Jest: framework para testes em JavaScript.</li>
+<li>Apache Kafka: O Apache Kafka é uma plataforma distribuída de transmissão de dados que é capaz de publicar, subscrever, armazenar e processar fluxos de registro em tempo real.</li>
+<li>NestJS: É um framework back-end que auxilia o desenvolvimento de aplicações eficientes. escaláveis e confiáveis em cima do Node.js.</li>
+<li>NodeJS: Node.js é um software de código aberto, multiplataforma, baseado no interpretador V8 do Google e que permite a execução de códigos JavaScript fora de um navegador web. A principal característica do Node.js é sua arquitetura assíncrona e orientada por eventos</li>
+<li>Prisma: É um ORM (Object Relational Mapper) de última geração.</li>
+<li>TypeScript: é uma linguagem de código aberto desenvolvida pela Microsoft que foi construída em cima do Javascript, que é muito difundido atualmente. Então esse “superset” foi criado para adicionar recursos de tipagem estáticas à linguagem original.</li>
+</ul>
+
+<p>Além das tecnologias utilizadas foram incluidas as seguintes dependências no projeto:</p>
+<ul>
 <li>Class-Transformer</li>
 <li>Class-Validator</li>
-<li>Jest</li>
-<li>Kafka</li>
-<li>NestJS</li>
-<li>Node</li>
-<li>Prisma</li>
-<li>TypeScript</li>
 </ul>
 
 ## Ferramentas
@@ -48,7 +52,7 @@
 
 ## Projeto 
 
-<p>Objetivo desse ignite é criar um microserviço com NestJs.</p>
+<p>Neste Ignite da Rocketseat foi criado um microserviço com NestJs.</p>
 
 <p>O caso de uso é o envio de notificações.</p>
 
@@ -59,12 +63,19 @@
 <li>src >> infra<li>
 </ul>
 
-<p>No diretório <b>src >> aplications</b> temos as entitades, os repositórios e os casos de uso. Tudo que for independente da camada externa da aplicação.</p>
+<p>No diretório <b>src >> aplications</b> temos as entitades, os repositórios e os casos de uso.</p> 
+<p>Tudo que for independente da camada externa da aplicação.</p>
 
 <p>No diretório <b>src >> infra</b> é referente a camada externa da aplicação. Como por exemplo Banco de dados, Controllers e serviços de mensageria</p>.
 
 
 ## Instalação
+
+## Máquina Virtual
+
+Utilizei o serviço da [Digital Ocean](https://www.digitalocean.com/) para criar 01 Droplet.
+Neste Droplet será instalado o NVM para gerenciar o Node.
+
 
 ### NVM
 
