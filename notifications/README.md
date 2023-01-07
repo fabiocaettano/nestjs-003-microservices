@@ -113,12 +113,12 @@ nvm use versão
 Clonar o projeto:
 
 ``` git
-$ 
+$ https://github.com/fabiocaettano/nestjs-003-microservices.git
 ```
 
 ### Variável de Ambiente
 
-<p>Criar o arquivo <b>.env</b> no diretório notifications e incluir as seguintes informações:</p>
+Criar o arquivo <b>.env</b> no diretório notifications e incluir as seguintes informações:
 
 ``` env
 DATABASE_URL="file:./dev.db"
@@ -126,7 +126,7 @@ DATABASE_URL="file:./dev.db"
 
 ### Instalar as Dependências
 
-<p>Instalar as dependências: </p>
+Instalar as dependências:
 
 ```
 $ npm install
@@ -134,13 +134,13 @@ $ npm install
 
 ### Migration
 
-<p>Criar a migartion com base no arquivo "prisma >> schema.prisma". O comando irá solicitar um nome para migration:</p>
+Criar a migartion com base no arquivo "prisma >> schema.prisma". O comando irá solicitar um nome para migration:
 
 ```
 $ npx prisma migrate dev
 ```
 
-<p>Prisma Studio:</p>
+Prisma Studio:
 
 ``` bash
 npx prisma studio
@@ -148,25 +148,25 @@ npx prisma studio
 
 ## Testes 
 
-<p>Executar os testes criados nos diretórios <b>application >> enities</b> e <b>application >> use-cases</b>:</p>
+Executar os testes criados nos diretórios <b>application >> enities</b> e <b>application >> use-cases</b>:
 
 ``` cli
 $ npm run test
 ```
 
-<p>Para visualizar a cobertura dos testes:</p>
+Para visualizar a cobertura dos testes:
 
 ``` ts
 $ npm run test:cov
 ```
 
-<p>Por padrão o Jest vem configurado no package.json.</p>
-<p>Neste laboratório o Jest foi configuardo na raiz do projeto com onome <b>jest.config.ts</b>.
+Por padrão o Jest vem configurado no package.json.
+Neste laboratório o Jest foi configuardo na raiz do projeto com onome <b>jest.config.ts.
 
 
 ## Executar
 
-<p>Executar o projeto:</p>
+Executar o projeto:
 
 ``` cli
 $ npm run start:dev
