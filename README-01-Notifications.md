@@ -1,7 +1,7 @@
 # Ignite Node | Microserviços | Dezembro 2022
 
 <p align="center">
-   <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=red"/>
+   <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20Concluído&color=green"/>
 </p>
 
 ## Sumário
@@ -90,43 +90,43 @@ Gerenciador de instalação no NodeJs.
 Executar o script para instalar o [NVM](https://github.com/nvm-sh/nvm) :
 
 ``` bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 ```
 
 Ativar o NVM:
 
 ``` bash
-~/. .profile
+$ ~/. .profile
 ```
 
 Visualizar as versões disponiveis:
 
 ``` bash
-nvm list-remote
+$ nvm list-remote
 ``` 
 
 Instalar uma versão:
 ``` bash
-nvm install vXX.XX.X
+$ nvm install vXX.XX.X
 ```
 
 Checar as versões locais:
 
 ``` bash
-nvm list
+$ nvm list
 ```
 
 Selecionar uma versão:
 
 ```
-nvm use vXX.XX.X
+$ nvm use vXX.XX.X
 ```
 
 ## Configurar Git
 
 ``` bash
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
+$ git config --global user.email "you@example.com"
+$ git config --global user.name "Your Name"
 ```
 
 ### Git Clone
@@ -142,8 +142,8 @@ $ https://github.com/fabiocaettano/nestjs-003-microservices.git
 Criar o arquivo <b>.env</b> no diretório notifications:
 
 ``` env
-cd notifications
-touch .env
+$ cd notifications
+$ touch .env
 ```
 
 Incluir a seguinte informação do banco de dados Prisma:
@@ -177,10 +177,10 @@ $ cd notifications
 $ npx prisma migrate dev
 ```
 
-Prisma Studio:
+Prisma Studio, ira abrir o browser:
 
 ``` bash
-npx prisma studio
+$ npx prisma studio
 ```
 
 ### Upstash
@@ -231,13 +231,15 @@ $ npx tsc --noEmit
 
 Executar os testes criados nos diretórios <b>application >> enities</b> e <b>application >> use-cases</b>:
 
-``` cli
+``` bash
+$ cd notifications
 $ npm run test
 ```
 
 Para visualizar a cobertura dos testes:
 
-``` ts
+``` bash
+$ cd notifications
 $ npm run test:cov
 ```
 
@@ -257,6 +259,7 @@ $ npm run start:dev
 ## Insomnia
 
 ### Project
+
 Criar um Projeto.
 
 ### Collection
@@ -267,9 +270,9 @@ Criar uma Collection.
 
 Clicar em "No Environment", em seguida clicar em "Manage Environments" para criar um atalho para o ip da aplicação:
 
-Configurar o ip da aplicação:
+Configurar o ip da máquina virtual:
 
-``` bash
+``` json
 {
 	"ip": "http://0.0.0.0:3000/"
 }
