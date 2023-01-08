@@ -59,8 +59,8 @@
 <p>Aplicação foi divida em dois diretórios:</p>
 
 <ul>
-<li>src >> application</li>
-<li>src >> infra<li>
+<li>1. src >> application;</li>
+<li>2. src >> infra.</li>
 </ul>
 
 <p>No diretório <b>src >> aplications</b> temos as entitades, os repositórios e os casos de uso. Tudo que for independente da camada externa da aplicação.</p>
