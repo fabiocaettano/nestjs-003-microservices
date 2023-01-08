@@ -11,16 +11,22 @@
 * [Projeto](#projeto)
 * [Instalação](#instalação)
    - [Nvm](##nvm)
+   - [Configurar Git](#configurar-git)
    - [Git Clone](##git-clone)
    - [Variável de Ambiente](##variável-de-ambiente)
-   - [Instalar Dependências](##instalar-dependências)
+   - [Dependências](##instalar-dependências)
    - [Migration](##migration)
+   - [Upstash](##upstash)
+* [Tsconfig](#tsconfig)
 * [Testes](#testes)
 * [Executar](#executar)
-* [Conceitos](#conceitos)
-   - [Factory](#factory)
-   - [Mappers](#mappers)
-* [Tsconfig](#tsconfig)
+* [Insomnia](#insonmnia)
+   - [Project](#project)
+   - [Collection](#collection)
+   - [Environment](#environment)
+   - [Http Request](#http-request)
+* [Consumir Mensagens](#consumir-mensagens)
+   
 
 
 ## Tecnologias
@@ -93,15 +99,35 @@ Ativar o NVM:
 ~/. .profile
 ```
 
-Comandos NVM:
+Visualizar as versões disponiveis:
 
 ``` bash
 nvm list-remote
-nvm list
-nvm insall versão
-nvm use versão
+``` 
+
+Instalar uma versão:
+``` bash
+nvm install vXX.XX.X
 ```
 
+Checar as versões locais:
+
+``` bash
+nvm list
+```
+
+Selecionar uma versão:
+
+```
+nvm use vXX.XX.X
+```
+
+## Configurar Git
+
+``` bash
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
 
 ### Git Clone
 
@@ -113,17 +139,32 @@ $ https://github.com/fabiocaettano/nestjs-003-microservices.git
 
 ### Variável de Ambiente
 
-Criar o arquivo <b>.env</b> no diretório notifications e incluir as seguintes informações:
+Criar o arquivo <b>.env</b> no diretório notifications:
+
+``` env
+cd notifications
+touch .env
+```
+
+Incluir a seguinte informação do banco de dados Prisma:
 
 ``` env
 DATABASE_URL="file:./dev.db"
 ```
 
-### Instalar as Dependências
+### Dependências
 
-Instalar as dependências:
+Instalar as dependências do aplicativo notificaions:
 
 ```
+$ cd notifications
+$ npm install
+```
+
+Instalar as dependências do diretório kafka-producer:
+
+``` bash
+$ cd kafka-producer
 $ npm install
 ```
 
@@ -132,6 +173,7 @@ $ npm install
 Criar a migartion com base no arquivo "prisma >> schema.prisma". O comando irá solicitar um nome para migration:
 
 ```
+$ cd notifications
 $ npx prisma migrate dev
 ```
 
@@ -141,74 +183,22 @@ Prisma Studio:
 npx prisma studio
 ```
 
-## Testes 
+### Upstash
 
-Executar os testes criados nos diretórios <b>application >> enities</b> e <b>application >> use-cases</b>:
+O [Upstash](https://upstash.com/) é um Serverless Data para Kafka.
 
-``` cli
-$ npm run test
+Na página utilizar a opção **Console**, para criar o Cluster e o Tópico.
+
+Será disponibilizado credencias para conectar no cluster, como brokers, username e password.
+
+Como são dados sensiveis incluir no arquivo **.env"":
+
+``` env
+DATABASE_URL="file:./dev.db"
+brokers=******
+username=******
+password=******
 ```
-
-Para visualizar a cobertura dos testes:
-
-``` ts
-$ npm run test:cov
-```
-
-Por padrão o Jest vem configurado no package.json.
-Neste laboratório o Jest foi configuardo na raiz do projeto com onome <b>jest.config.ts.
-
-
-## Executar
-
-Executar o projeto:
-
-``` cli
-$ npm run start:dev
-```
-
-## Conceitos
-
-### Factory
-<p>Exemplo da chamada da factory:</p>
-
-``` ts
-await notificationRepository.create(makeNotification({ recipientId : 'recipient-1'}),);
-await notificationRepository.create(makeNotification({ recipientId : 'recipient-1'}),);
-await notificationRepository.create(makeNotification({ recipientId : 'recipient-2'}),);
-```
-
-### Mappers
-
-<p>Mappers auxilia na representação de entidades em diversas camadas.</p>
-<p>Como Exemplo a entidade Notificação dessa aplicação é representada de diferentes formas.</p>
-<p>Mappers realiza a conversão e adaptação desses dados dados.</p>
-
-<p>Mappers aplicado no retorno da inclusão de uma notificação:</p>
-
-``` ts
-import { Notification } from '@application/entities/notifications';
-
-export class NotificationViewModel{
-    static toHTTP(notification: Notification){
-        return {
-            id: notification.id,
-            content: notification.content.value,
-            category: notification.category,
-            recipientId: notification.recipientId        
-        }
-    }   
-}
-```
-
-<p>Dentro do metódo create do controller:</p>
-
-``` ts
-return {
-    notification: NotificationViewModel.toHTTP(notification),
-}
-```
-
 
 ## Tsconfig
 
@@ -236,4 +226,105 @@ $ npx tsc --noEmit
 "strict": false,
 "strictNullChecks": true
 ```
+
+## Testes 
+
+Executar os testes criados nos diretórios <b>application >> enities</b> e <b>application >> use-cases</b>:
+
+``` cli
+$ npm run test
+```
+
+Para visualizar a cobertura dos testes:
+
+``` ts
+$ npm run test:cov
+```
+
+Por padrão o Jest vem configurado no package.json.
+Neste laboratório o Jest foi configuardo na raiz do projeto com onome <b>jest.config.ts.
+
+
+## Executar
+
+Executar o projeto:
+
+``` cli
+$ cd notifications
+$ npm run start:dev
+```
+
+## Insomnia
+
+### Project
+Criar um Projeto.
+
+### Collection
+
+Criar uma Collection.
+
+### Environment
+
+Clicar em "No Environment", em seguida clicar em "Manage Environments" para criar um atalho para o ip da aplicação:
+
+Configurar o ip da aplicação:
+
+``` bash
+{
+	"ip": "http://0.0.0.0:3000/"
+}
+```
+
+### Http Request
+
+Agorar criar um Http Request.
+
+Registrar uma notificação:
+
+``` 
+Metódo: POST 
+Url: {{ _.ip }}notifications 
+JSON: {
+	"recipientId" : "395bfedb-a518-48f0-8f9e-4e91ffcc1d22",
+	"content" : "teste sete",
+	"category": "categoria sete"
+}
+```
+
+Contar notificações:
+
+```
+Metódo: Get
+Url: {{ _.ip }}notifications/count/from/idDoRecipient
+```
+
+Pesquisar RecipientId:
+
+```
+Metódo: Get
+Url: {{ _.ip }}notifications/from/idDoRecipient
+```
+
+Read:
+
+```
+{{ _.ip }}notifications/idDoRecipient/read
+```
+
+Unread:
+
+```
+{{ _.ip }}notifications/idDoRecipient/unread
+```
+
+## Consumir Mensagens
+
+Enviar mensagem para registrar uma notificação:
+
+``` cli
+$ cd kafka-producer
+$ node producer.js
+```
+
+No site do Upstah pode ser visualida o total de mensagen com status de Produced e Consumed.
 

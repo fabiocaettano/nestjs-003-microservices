@@ -9,11 +9,11 @@ export class KafkaConsumerService extends ServerKafka implements OnModuleDestroy
         super({
             client: {
                 clientId: 'test-producer',
-                brokers: [`${process.env.BROKERS_UPSTASH}`],
+                brokers: [`${process.env.brokers}`],
                 sasl: {
                     mechanism: 'scram-sha-256',
-                    username: `${process.env.USERNAME_UPSTASH}`,
-                    password: `${process.env.PASSWORD_UPSTASH}`,
+                    username: `${process.env.username}`,
+                    password: `${process.env.password}`,
                 },
                 ssl: true,
             }
