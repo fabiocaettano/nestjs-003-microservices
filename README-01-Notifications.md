@@ -242,7 +242,7 @@ $ npm run test:cov
 ```
 
 Por padrão o Jest vem configurado no package.json.
-Neste laboratório o Jest foi configuardo na raiz do projeto com onome <b>jest.config.ts.
+Neste laboratório o Jest foi configuardo na raiz do projeto com onome **jest.config.ts**.
 
 
 ## Executar
