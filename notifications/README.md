@@ -52,20 +52,15 @@
 
 ## Projeto 
 
-<p>Neste Ignite da Rocketseat foi criado um microserviço com NestJs.</p>
+Neste Ignite da Rocketseat foi criado um microserviço com NestJs.
 
-<p>O caso de uso é o envio de notificações.</p>
+O caso de uso é o envio de notificações.
 
-<p>Aplicação foi divida em dois diretórios:</p>
+Aplicação foi divida em dois diretórios: **application** e **infra**.
 
-<ul>
-<li>1. src >> application;</li>
-<li>2. src >> infra.</li>
-</ul>
+No diretório **src >> aplications** temos as entitades, os repositórios e os casos de uso. Tudo que for independente da camada externa da aplicação.
 
-<p>No diretório <b>src >> aplications</b> temos as entitades, os repositórios e os casos de uso. Tudo que for independente da camada externa da aplicação.</p>
-
-<p>No diretório <b>src >> infra</b> é referente a camada externa da aplicação. Como por exemplo Banco de dados, Controllers e serviços de mensageria</p>.
+No diretório **src >> infra** é referente a camada externa da aplicação. Como por exemplo Banco de dados, Controllers e serviços de mensageria.
 
 
 ## Instalação
